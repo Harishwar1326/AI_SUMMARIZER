@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "ai-content-summarizer-backend",
   "private": true,
   "type": "module",
@@ -14,7 +14,6 @@
     "@google/generative-ai": "^0.24.1",
     "mammoth": "^1.9.0",
     "multer": "^1.4.5-lts.1",
-    "pdf-parse": "^1.1.1",
-    "mongodb": "^6.16.0"
+    "pdf-parse": "^1.1.1"
   }
 }

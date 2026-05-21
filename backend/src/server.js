@@ -1,10 +1,9 @@
-import "dotenv/config";
+﻿import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import multer from "multer";
 import { analyzeCognitiveDrift } from "./cognitiveDrift.js";
 import { extractContentFromUpload, extractContentFromUrl } from "./content.js";
-import { storeSummaryRecord } from "./mongoStore.js";
 import { generatePerspectiveSummaries } from "./perspectiveEngine.js";
 import { summarizeContent } from "./summarizer.js";
 
@@ -34,14 +33,11 @@ app.post("/api/summarize", upload.single("file"), async (request, response) => {
       : "neutral";
 
     let content = (request.body.content ?? "").trim();
-    let sourceType = "text";
 
     if (request.file) {
       content = await extractContentFromUpload(request.file);
-      sourceType = "file";
     } else if (request.body.url?.trim()) {
       content = await extractContentFromUrl(request.body.url.trim());
-      sourceType = "url";
     }
 
     if (!content) {
@@ -58,23 +54,8 @@ app.post("/api/summarize", upload.single("file"), async (request, response) => {
       style,
       tone,
     });
-    const record = await storeSummaryRecord({
-      originalContent: content,
-      summarizedContent,
-      mode,
-      summaryLength,
-      style,
-      tone,
-      sourceType,
-      analysis: {
-        driftAnalysis,
-        perspectiveAnalysis,
-      },
-    });
 
     response.json({
-      id: record.id,
-      createdAt: record.createdAt,
       summarizedContent,
       originalContent: content,
       driftAnalysis,
