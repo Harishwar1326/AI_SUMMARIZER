@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/dist",
+  "env": {
+    "MONGO_URI": "@mongo_uri",
+    "GEMINI_API_KEY": "@gemini_api_key"
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/backend/src/server.js"
+    }
+  ]
+}
