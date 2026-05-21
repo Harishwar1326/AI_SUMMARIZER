@@ -1,5 +1,5 @@
 {
-  "name": "ai-content-summarizer",
+  "name": "ai-content-summarizer-app",
   "private": true,
   "workspaces": [
     "backend",
