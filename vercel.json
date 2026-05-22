@@ -3,8 +3,8 @@
   "outputDirectory": "frontend/dist",
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/src/server.js"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

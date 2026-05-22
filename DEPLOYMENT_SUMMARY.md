@@ -1,24 +1,24 @@
 ﻿# Deployment Summary
 
-The project has been simplified for Vercel deployment without MongoDB.
+The project is configured for a split deployment:
+
+Frontend (React + Vite) -> Vercel
+Backend (Express) -> Render
 
 ## Current Architecture
 
-Frontend (React + Vite) -> Vercel -> Backend (Express) -> Gemini API
-
-## What Changed
-
-- Removed MongoDB dependency and persistence code
-- Removed database environment variables
-- Kept summarization, drift analysis, and perspective analysis
-- Kept a minimal Vercel configuration
+- Vercel serves the UI
+- Render serves the API
+- The frontend reads the backend URL from `VITE_API_BASE_URL`
 
 ## What You Need
 
 - GitHub repository
+- Render account
 - Vercel account
-- `GEMINI_API_KEY`
+- `GEMINI_API_KEY` on Render
+- `VITE_API_BASE_URL` on Vercel
 
 ## Result
 
-The app now works as a stateless summarizer and does not store content in a database.
+The app now supports a production frontend/backend split without hardcoded localhost API calls.

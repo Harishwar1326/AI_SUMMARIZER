@@ -1,20 +1,31 @@
 ﻿# Vercel Deployment Guide
 
-This project is now ready for Vercel without any database connection.
+This project is set up for a split deployment:
 
-## Required Environment Variable
+- Backend on Render
+- Frontend on Vercel
 
-- `GEMINI_API_KEY`: Google Gemini API key
+## Required Environment Variables
 
-## Deploy
+- Render backend: `GEMINI_API_KEY`
+- Vercel frontend: `VITE_API_BASE_URL`
 
-1. Push the repository to GitHub.
-2. Import the repo in Vercel.
-3. Add `GEMINI_API_KEY` in Vercel environment variables.
+## Render Backend
+
+1. Create a new Web Service from the repo.
+2. Set the root directory to `backend`.
+3. Set the build command to `npm install`.
+4. Set the start command to `npm start`.
+5. Add `GEMINI_API_KEY` as a secret environment variable.
+
+## Vercel Frontend
+
+1. Import the repo in Vercel.
+2. Keep the root build using `npm run build`.
+3. Set `VITE_API_BASE_URL` to your Render backend URL, for example `https://your-service.onrender.com`.
 4. Deploy.
 
 ## Notes
 
-- The app stores no summaries in MongoDB.
-- `/api/summarize` runs the summarizer, drift analysis, and perspective engine in the backend.
-- `vercel.json` only configures the build and API rewrite.
+- The frontend calls the backend through `VITE_API_BASE_URL` in production and falls back to relative `/api` calls in local development.
+- `vercel.json` is configured for the Vite app, not for backend routing.

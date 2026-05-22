@@ -11,6 +11,12 @@ const initialForm = {
   mode: "extractive"
 };
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim().replace(/\/$/, "") ?? "";
+
+function apiUrl(path) {
+  return apiBaseUrl ? `${apiBaseUrl}${path}` : path;
+}
+
 export default function App() {
   const [form, setForm] = useState(initialForm);
   const [file, setFile] = useState(null);
@@ -46,7 +52,7 @@ export default function App() {
         payload.append("file", file);
       }
 
-      const response = await fetch("/api/summarize", {
+      const response = await fetch(apiUrl("/api/summarize"), {
         method: "POST",
         body: payload
       });
