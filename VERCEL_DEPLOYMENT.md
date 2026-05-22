@@ -22,7 +22,7 @@ This project is set up for a split deployment:
 
 1. Import the repo in Vercel.
 2. Keep the root build using `npm run build`.
-3. Set `VITE_API_BASE_URL` to your Render backend URL, for example `https://your-service.onrender.com`.
+3. Set `VITE_API_BASE_URL` to `https://ai-summarizer-0fz8.onrender.com`.
 4. Deploy.
 
 ## Notes
